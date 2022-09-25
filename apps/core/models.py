@@ -1,4 +1,9 @@
 from django.db import models
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+
+def convert_object_in_json(item):
+    return json.dumps(list(item), cls = DjangoJSONEncoder)
 
 class BaseModel(models.Model):
     is_active = models.BooleanField(verbose_name = "Ativo", default = True)
