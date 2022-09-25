@@ -1,5 +1,8 @@
 {% load static %}
 
+{% load compress %}
+
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,20 +11,24 @@
 
 <!-- <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.svg' %}"> -->
 
-<!-- Import Bootstrap 5 CSS -->
-<link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
+{% compress css %}
 
-<!-- Import Material Icons -->
-<link rel="stylesheet" href="{% static 'css/material-icons/filled/material-icons-filled.min.css' %}">
+    <!-- Import Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
 
-<!-- Import Styles CSS -->
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <!-- Import Material Icons -->
+    <link rel="stylesheet" href="{% static 'css/material-icons/filled/material-icons-filled.min.css' %}">
 
-<!-- Import HoldOn CSS -->
-<!-- <link rel="stylesheet" href="{% static 'css/holdon/holdon.min.css' %}"> -->
+    <!-- Import Styles CSS -->
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
 
-{% block css %}
-{% endblock %}
+    <!-- Import HoldOn CSS -->
+    <link rel="stylesheet" href="{% static 'css/holdon/holdon.min.css' %}">
+
+    {% block css %}
+    {% endblock %}
+
+{% endcompress %}
 
 <!-- Title Page -->
 <title> Too dos </title>
@@ -50,42 +57,23 @@
     </div>
 </noscript>
 
-<!-- Import JQuery JS -->
-<script type="text/javascript" src="{% static 'js/jquery/jquery.min.js' %}"></script>
+{% compress js %}
 
-<!-- Import Bootstrap Bundle JS -->
-<script type="text/javascript" src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}" defer></script>
+    <!-- Import JQuery JS -->
+    <script type="text/javascript" src="{% static 'js/jquery/jquery.min.js' %}"></script>
 
-<!-- Import Scripts JS -->
-<script type="text/javascript" src="{% static 'js/scripts.js' %}" defer></script>
+    <!-- Import Bootstrap Bundle JS -->
+    <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}" defer></script>
 
-<!-- Import HoldOn JS -->
-<!-- <script type="text/javascript" src="{% static 'js/holdon/holdon.min.js' %}" defer></script> -->
+    <!-- Import Scripts JS -->
+    <script type="text/javascript" src="{% static 'js/scripts.js' %}" defer></script>
 
-<!-- <script type="text/javascript" defer>
+    <!-- Import HoldOn JS -->
+    <script type="text/javascript" src="{% static 'js/holdon/holdon.min.js' %}" defer></script>
 
-    $(document).ready(function(){
+    <script type="text/javascript" defer>
+        /* disabled Context Menu on pages */
+        //document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
 
-        await new Promise(resolve => {
-
-        })
-        $(window).bind('beforeunload', function() {
-            console.log("abriu")
-            loadingInit();
-        });
-
-        $(window).on("load", function() {
-            console.log("fechou")
-            loadingStop();
-        }) 
-    });
-</script> -->
-
-<script type="text/javascript" defer>
-    $(document).on("ready", function(){
-        
-    });
-
-    /* disabled Context Menu on pages */
-    //document.addEventListener('contextmenu', event => event.preventDefault());
-</script>
+{% endcompress %}
