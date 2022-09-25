@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="vw-100 position-relative bg-primary" style="height: 300px;">
+        <div class="position-absolute top-100 start-50 translate-middle">
+            <form>
+                <input type="text" class="form-control" id="search-todo" placeholder="Pesquisar...">
+            </form>
+        </div>
+    </div>
+
+    <div class="vw-100 h-100 bg-secondary">
+        {% for todo in todos %}
+            <div class="">
+                {{ todo.title }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="">criar</a>
+{% endblock %}
