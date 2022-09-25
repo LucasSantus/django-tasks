@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load bootstrap5 %}
+
 {% block content %}
     <div class="vw-100 position-relative bg-primary" style="height: 300px;">
         <div class="position-absolute top-100 start-50 translate-middle">
@@ -9,13 +11,79 @@
         </div>
     </div>
 
-    <div class="vw-100 h-100 bg-secondary">
-        {% for todo in todos %}
-            <div class="">
-                {{ todo.title }}
-            </div>
-        {% endfor %}
-    </div>
+    <div id="build__todos" class="vw-100 h-100 bg-secondary"></div>
 
-    <a href="">criar</a>
+    <!-- Button trigger modal -->
+    <button type="button" class="position-absolute btn btn-primary" style="bottom: 20px; right: 20px" data-bs-toggle="modal" data-bs-target="#modal_create_todo">
+        add
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal_create_todo" tabindex="-1" aria-labelledby="modal_create_todo_label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body p-3">
+                    <form id="id_form" method="POST">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <button id="btn-submit" class="btn btn__custom__primary hover d-grid w-100 rounded-3 mt-1 mb-2" type="submit">Logar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <!-- BEGIN: INICIALIZAÇÂO -->
+        <script>
+            $(document).ready(function(){
+                let todos = "{{ todos | escapejs  }}";
+
+                build__todos(JSON.parse(todos), "build__todos");
+            });
+        </script>
+    <!-- END: INICIALIZAÇÂO -->
+
+    <!-- BEGIN: VALIDAÇÃO DE USUÁRIO -->
+        <script>
+            $("#id_form").submit(function (event) {
+                // preventing from page reload and default actions
+                event.preventDefault();
+
+                // serialize the data for sending the form data.
+                let form = $(this).serialize();
+
+                // make POST ajax call
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'create_todo' %}",
+                    data: form,
+                    success: function (response) {
+                        // 1. clear the form.
+                        $("#id_form").trigger('reset');
+
+                        var instance = JSON.parse(response["instance"]);
+                        var fields = instance[0]["fields"];
+                        console.log(fields)
+                        build__todos(fields, "build__todos");
+                        /*
+                        var instance = JSON.parse(response["instance"]);
+                        var fields = instance[0]["fields"];
+                        $("#my_friends tbody").prepend(
+                            `<tr>
+                            <td>${fields["nick_name"]||""}</td>
+                            <td>${fields["first_name"]||""}</td>
+                            <td>${fields["last_name"]||""}</td>
+                            <td>${fields["likes"]||""}</td>
+                            <td>${fields["dob"]||""}</td>
+                            <td>${fields["lives_in"]||""}</td>
+                            </tr>`
+                        )
+                        */
+                    },
+                });
+            });
+        </script>
+    <!-- END: VALIDAÇÃO DE USUÁRIO -->
 {% endblock %}
