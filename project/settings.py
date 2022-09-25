@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 # Extern Apps
 INSTALLED_APPS += [
     'bootstrap5',
+    'compressor'
 ]
 
 # Intern Apps
@@ -132,6 +133,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
 AUTH_USER_MODEL = "users.User"
 
