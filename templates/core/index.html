@@ -44,11 +44,9 @@
 {% endblock %}
 
 {% block script %}
-
     <!-- BEGIN: INICIALIZAÇÂO -->
         <script>
             $(document).ready(function(){
-
                 let todos = "{{ todos | escapejs  }}";
 
                 get_all_todos(JSON.parse(todos), "id_todos");
@@ -68,32 +66,26 @@
                     description: { required: 'Informe o seu email' },
                 },
                 invalidHandler: function(event, validator) {
-                    console.log("event: ", event, "validator: ", validator.errorList);
-                    
-                    for (var i = 0; i < validator.errorList.length; i++) {
-                        if (validator.errorList[i].element.name == "id_title") {
-                            $("#id_title")
-                                .closest(".ctrl")
-                                .addClass("has-error");
-                            $("#id_title-error").show();
-                        }
-                        else {
-                            $("#" + validator.errorList[i].element.id)
-                                .closest(".ctrl")
-                                .addClass("has-error");
-                        }
+                    console.log(validator)
+                    for( const item of validator.errorList ){
+                        $("#" + item.element.id).addClass("is-invalid");
+
+                        $("#" + item.element.id + "-label").remove();
+
+                        const div = $('#' + item.element.id).parent();
+
+                        $(`<label id="${item.element.id}-label" class="invalid-feedback">${item.message}</label>`).appendTo(div);
                     }
                 },
                 errorPlacement: function() {},
                 submitHandler: function( form ){
-                    var dados = $( form ).serialize(); 
+                    var data = $( form ).serialize(); 
 
                     $.ajax({
                         type: "POST",
                         url: "{% url 'create_todo' %}",
-                        data: dados,
+                        data: data,
                         success: function( response ){
-                            
                             $("#id_form").trigger('reset');
 
                             let instance = JSON.parse(response["data"]);
@@ -105,34 +97,6 @@
                     return false;
                 }
             });
-
-            /*
-            $("#id_form").submit(function (event) {
-                // preventing from page reload and default actions
-                event.preventDefault();
-
-                // serialize the data for sending the form data.
-                let data = $(this).serialize();
-
-                // make POST ajax call
-                $.ajax({
-                    type: 'POST',
-                    url: "{% url 'create_todo' %}",
-                    data: data,
-                    dataType: 'json',
-                    success: function (response, status) {
-
-                        console.log(status);
-                        $("#id_form").trigger('reset');
-
-                        let instance = JSON.parse(response["data"]);
-                        let fields = instance[0]["fields"];
-
-                        get_all_todos(fields, "id_todos");
-                    },
-                });
-            });
-            */
         </script>
     <!-- END: VALIDAÇÃO DE USUÁRIO -->
 {% endblock %}
