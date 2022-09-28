@@ -17,6 +17,6 @@ def create_todo(request):
             data_serialized = serializers.serialize('json', [ data ])
             return JsonResponse({ "data": data_serialized }, status = 200)
         else:
-            return JsonResponse({ "error": form.errors }, status = 400)
+            return JsonResponse({ "error": form.errors }, status = 201)
 
     return JsonResponse({"error": ""}, status = 400)

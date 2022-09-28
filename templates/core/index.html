@@ -35,69 +35,41 @@
     </div>
 {% endblock %}
 
-{% block css %}
-    <style>
-        .error{
-            background: red !important
-        }
-    </style>
-{% endblock %}
-
 {% block script %}
-    <!-- BEGIN: INICIALIZAÇÂO -->
-        <script>
-            $(document).ready(function(){
-                let todos = "{{ todos | escapejs  }}";
+    <script>
+        $(document).ready(function(){
+            let data = "{{ todos | escapejs  }}";
+            
+            get_all_todos("GET", data, "id_todos");
+        });
 
-                get_all_todos(JSON.parse(todos), "id_todos");
-            });
-        </script>
-    <!-- END: INICIALIZAÇÂO -->
-
-    <!-- BEGIN: VALIDAÇÃO DE USUÁRIO -->
-        <script>
-            $('#id_form').validate({
-                rules: {
-                    title: { required: true, minlength: 2 },
-                    description: { required: true },
-                },
-                messages: {
-                    title: { required: 'Preencha o campo nome', minlength: 'No mínimo 2 letras' },
-                    description: { required: 'Informe o seu email' },
-                },
-                invalidHandler: function(event, validator) {
-                    console.log(validator)
-                    for( const item of validator.errorList ){
-                        $("#" + item.element.id).addClass("is-invalid");
-
-                        $("#" + item.element.id + "-label").remove();
-
-                        const div = $('#' + item.element.id).parent();
-
-                        $(`<label id="${item.element.id}-label" class="invalid-feedback">${item.message}</label>`).appendTo(div);
-                    }
-                },
-                errorPlacement: function() {},
-                submitHandler: function( form ){
-                    var data = $( form ).serialize(); 
-
-                    $.ajax({
-                        type: "POST",
-                        url: "{% url 'create_todo' %}",
-                        data: data,
-                        success: function( response ){
+        $('#id_form').validate({
+            rules: {
+                title: { required: true, minlength: 2 },
+                description: { required: true },
+            },
+            messages: {
+                title: { required: 'Preencha o campo nome', minlength: 'No mínimo 2 letras' },
+                description: { required: 'Informe o seu email' },
+            },
+            validClass: "is-valid",
+            errorClass: "is-invalid",
+            submitHandler: function( form ){
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'create_todo' %}",
+                    data: $( form ).serialize(),
+                    success: function( response ){
+                        if( response.status === 200 ) {
                             $("#id_form").trigger('reset');
-
-                            let instance = JSON.parse(response["data"]);
-                            let fields = instance[0]["fields"];
-
-                            get_all_todos(fields, "id_todos");
+                            get_all_todos("POST", response, "id_todos");
+                        } else {
+                            generate_toast("error", "Falha na autenticação!", response["error"]);
                         }
-                    });
-                    return false;
-                }
-            });
-        </script>
-    <!-- END: VALIDAÇÃO DE USUÁRIO -->
+                    }
+                });
+                return false;
+            }
+        });
+    </script>
 {% endblock %}
-
