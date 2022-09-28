@@ -5,12 +5,16 @@
 <html lang="pt-BR">
     <head>
         {% include "components/head.html" %}
+
+        {% block css %}
+        {% endblock %}
     </head>
 
     <body>
         <main>
             {% block content %}
             {% endblock %}
+            <div id="assembly"></div>
         </main>
 
         {% block script %}
