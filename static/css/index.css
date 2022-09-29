@@ -1,6 +1,6 @@
 :root{
-    --primary-color: blue;
-    --secondary-color: red;
+    --primary-color: #232a3b;
+    --secondary-color: #293145;
     --third-color: yellow;
 }
 
@@ -50,7 +50,15 @@
 /* BORDER RADIUS */
 
 .rounded__custom{
-    border-radius: 9px;
+    border-radius: 11px;
+}
+
+.rounded__custom_2{
+    border-radius: 16px;
+}
+
+.rounded__custom_3{
+    border-radius: 36px;
 }
 
 /* OPACITY */
@@ -65,4 +73,4 @@
 
 .selector-for-some-widget {
     box-sizing: content-box;
-  }
+}
