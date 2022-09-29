@@ -7,6 +7,8 @@ from django.core import serializers
 
 # CATEGORY
 def create_todo(request):
+    context = { "error": None, "status": 400 }
+    
     if request.is_ajax and request.method == "POST":
         form = TodoForm(request.POST)
         if form.is_valid():
@@ -15,8 +17,13 @@ def create_todo(request):
             data.save()
             
             data_serialized = serializers.serialize('json', [ data ])
-            return JsonResponse({ "data": data_serialized }, status = 200)
-        else:
-            return JsonResponse({ "error": form.errors }, status = 201)
 
-    return JsonResponse({"error": ""}, status = 400)
+            context = { "data": data_serialized, "status": 200 }
+
+            # return JsonResponse({ "data": data_serialized }, status = 200)
+        else:
+            
+            context = { "error": form.errors, "status": 400 }
+            # return JsonResponse({ "error": form.errors }, status = 400)
+
+    return JsonResponse(context)

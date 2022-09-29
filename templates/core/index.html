@@ -3,20 +3,23 @@
 {% load bootstrap5 %}
 
 {% block content %}
-    <div class="vw-100 position-relative bg-primary" style="height: 300px;">
+    <!-- Button trigger modal -->
+    <button type="button" class="position-fixed btn btn__floating border__primary rounded__custom hover" data-bs-toggle="modal" data-bs-target="#modal_create_todo">
+        <span class="material-icons">
+            add
+        </span>
+    </button>
+
+    <div class="vw-100 position-relative bg__primary" style="height: 300px;">
         <div class="position-absolute top-100 start-50 translate-middle">
             <form>
                 <input type="text" class="form-control" id="search-todo" placeholder="Pesquisar...">
             </form>
         </div>
     </div>
-
-    <div id="id_todos" class="vw-100 h-100 bg-secondary"></div>
-
-    <!-- Button trigger modal -->
-    <button type="button" class="position-absolute btn btn-primary" style="bottom: 20px; right: 20px" data-bs-toggle="modal" data-bs-target="#modal_create_todo">
-        add
-    </button>
+    <div class="mt-4">
+        <div id="id_todos" class="vw-100 h-100 bg__secondary"></div>
+    </div>
 
     <!-- Modal -->
     <div class="modal" id="modal_create_todo" tabindex="-1" aria-labelledby="modal_create_todo_label" aria-hidden="true">
