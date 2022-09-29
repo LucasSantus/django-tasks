@@ -1,4 +1,66 @@
+:root{
+    --primary-color: blue;
+    --secondary-color: red;
+    --third-color: yellow;
+}
 
+/* BACKGROUNDS */
+.bg__primary{
+    background-color: var(--primary-color) !important;
+}
+.bg__secondary{
+    background-color: var(--secondary-color) !important;
+}
+.bg__third{
+    background-color: var(--third-color) !important;
+}
+
+/* BUTTONS */
+.btn{
+    color: white !important;
+}
+.btn__floating{
+    height: 40px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background-color: var(--secondary-color) !important;
+    bottom: 20px; 
+    right: 20px;
+}
+.btn__primary{
+    background-color: var(--primary-color) !important;
+}
+.btn__secondary{
+    background-color: var(--secondary-color) !important;
+}
+.btn__third{
+    background-color: var(--third-color) !important;
+}
+
+/* BORDERS */
+.border__primary{
+    border: 1px solid var(--primary-color) !important;
+}
+.border__secondary{
+    border: 1px solid var(--secondary-color) !important;
+}
+.border__third{
+    border: 1px solid var(--third-color) !important;
+}
+
+/* BORDER RADIUS */
+
+.rounded__custom{
+    border-radius: 9px;
+}
+
+/* OPACITY */
+.hover:hover{
+    opacity: .7;
+}
+
+/* OTHERS */
 .is-invalid{
     color: red !important
 }
