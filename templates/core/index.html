@@ -3,13 +3,6 @@
 {% load bootstrap5 %}
 
 {% block content %}
-    <!-- Button trigger modal -->
-    <button type="button" class="position-fixed btn btn__floating border__primary rounded__custom hover" data-bs-toggle="modal" data-bs-target="#modal_create_todo">
-        <span class="material-icons">
-            add
-        </span>
-    </button>
-
     <div class="vw-100 position-relative bg__primary" style="height: 300px;">
         <div class="position-absolute top-100 start-50 translate-middle">
             <form>
@@ -36,11 +29,22 @@
             </div>
         </div>
     </div>
+
+    <!-- Button trigger modal -->
+    <div class="position-fixed" style="bottom: 20px; right: 20px;" data-bs-toggle="tooltip" data-bs-placement="left" title="Registrar nova tarefa">
+        <button class="position-relative btn btn__floating border__primary rounded__custom hover" data-bs-toggle="modal" data-bs-target="#modal_create_todo">
+            <span class="material-icons">
+                add
+            </span>
+        </button>
+    </div>
 {% endblock %}
 
 {% block script %}
     <script>
         $(document).ready(function(){
+            $("[data-bs-toggle='tooltip']").tooltip();
+            
             let data = "{{ todos | escapejs  }}";
             
             get_all_todos("GET", data, "id_todos");
