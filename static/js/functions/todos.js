@@ -13,7 +13,7 @@ const get_all_todos = ( method, response, id ) => {
     if( values.length > 1 ){
         for( let item of values ) build_todo(item, id);
     } else {
-        build_todo(values, id);
+        if( values.length != 0 ) build_todo(values, id);
     }
 
     $('.modal').modal('hide');
