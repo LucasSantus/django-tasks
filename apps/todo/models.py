@@ -4,7 +4,7 @@ from autoslug import AutoSlugField
 
 # Create your models here.
 class Todo(BaseModel):
-    title = models.CharField(verbose_name = "Título", max_length = 100, unique = True)
+    title = models.CharField(verbose_name = "Título", max_length = 100)
     description = models.TextField(verbose_name = "Descrição")
     slug = AutoSlugField(populate_from = 'title', unique_with = [ 'title' ], unique = True, editable = True)
     user = models.ForeignKey("users.User", on_delete = models.CASCADE, related_name="user_todos")
