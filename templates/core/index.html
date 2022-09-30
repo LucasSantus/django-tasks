@@ -3,15 +3,16 @@
 {% load bootstrap5 %}
 
 {% block content %}
-    <div class="vw-100 position-relative bg__primary" style="height: 300px;">
-        <div class="position-absolute top-100 start-50 translate-middle">
+    <div class="vw-100 vh-100 bg__secondary">
+        <div class="container">
             <form>
                 <input type="text" class="form-control" id="search-todo" placeholder="Pesquisar...">
             </form>
         </div>
-    </div>
-    <div class="mt-4">
-        <div id="id_todos" class="vw-100 h-100 bg__secondary"></div>
+        
+        <div class="mt-4">
+            <div id="id_tasks" class="vw-100 h-100 bg__secondary"></div>
+        </div>
     </div>
 
     <!-- Modal -->
@@ -56,9 +57,9 @@
         $(document).ready(function(){
             $("[data-bs-toggle='tooltip']").tooltip();
             
-            let data = "{{ todos | escapejs  }}";
+            let data = "{{ tasks | escapejs  }}";
             
-            get_all_todos("GET", data, "id_todos");
+            get_all_todos("GET", data, "id_tasks");
         });
 
         $('#id_form').validate({
@@ -75,12 +76,12 @@
             submitHandler: function( form ){
                 $.ajax({
                     type: "POST",
-                    url: "{% url 'create_todo' %}",
+                    url: "{% url 'create_task' %}",
                     data: $( form ).serialize(),
                     success: function( response ){
                         if( response.status === 200 ) {
                             $("#id_form").trigger('reset');
-                            get_all_todos("POST", response, "id_todos");
+                            get_all_todos("POST", response, "id_tasks");
                         } else {
                             generate_toast("error", "Falha na autenticação!", response["error"]);
                         }

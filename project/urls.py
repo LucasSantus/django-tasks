@@ -12,8 +12,8 @@ urlpatterns = [
     
     # INCLUDE APPS
     path('', include('core.urls')),
-    path('', include('users.urls')),
-    path('', include('todo.urls')),
+    path('', include('accounts.urls')),
+    path('', include('tasks.urls')),
 ]
 
 # INCLUDE STATIC

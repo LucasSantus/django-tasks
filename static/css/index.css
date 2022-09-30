@@ -36,7 +36,7 @@
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    background-color: var(--secondary-color) !important;
+    background-color: var(--primary-color) !important;
 }
 .btn__primary{
     background-color: var(--primary-color) !important;

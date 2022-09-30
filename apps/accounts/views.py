@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from django.views.generic.edit import CreateView
+from accounts.forms import SignupForm
 
-# Create your views here.
+class signup(CreateView):
+    template_name = 'users/signup/signup.html'
+    form_class = SignupForm
