@@ -3,44 +3,63 @@
 {% load bootstrap5 %}
 
 {% block content %}
-    <div class="vw-100 position-relative bg-primary" style="height: 300px;">
-        <div class="position-absolute top-100 start-50 translate-middle">
+    <div class="vw-100 vh-100 bg__secondary">
+        <div class="container">
             <form>
                 <input type="text" class="form-control" id="search-todo" placeholder="Pesquisar...">
             </form>
         </div>
+        
+        <div class="mt-4">
+            <div id="id_tasks" class="vw-100 h-100 bg__secondary"></div>
+        </div>
     </div>
-
-    <div id="id_todos" class="vw-100 h-100 bg-secondary"></div>
-
-    <!-- Button trigger modal -->
-    <button type="button" class="position-absolute btn btn-primary" style="bottom: 20px; right: 20px" data-bs-toggle="modal" data-bs-target="#modal_create_todo">
-        add
-    </button>
 
     <!-- Modal -->
     <div class="modal" id="modal_create_todo" tabindex="-1" aria-labelledby="modal_create_todo_label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body p-3">
+            <div class="modal-content bg__secondary rounded__custom">
+                <div class="modal-body bg__secondary p-3 rounded__custom_3">
                     <form id="id_form" method="POST">
                         {% csrf_token %}
                         {% bootstrap_form form %}
 
-                        <button id="btn-submit" class="btn btn__custom__primary hover d-grid w-100 rounded-3 mt-1 mb-2" type="submit">Logar</button>
+                        <div class="d-flex justify-content-end gap-2">
+                            <a id="btn-submit" class="btn btn-outline-secondary hover rounded-3 ft-bold" data-bs-dismiss="modal">
+                                <span class="px-3">
+                                    Cancelar
+                                </span>
+                            </a>
+                            <button id="btn-submit" class="btn btn-primary hover rounded-3 ft-bold" type="submit">
+                                <span class="px-3">
+                                    Registrar
+                                </span>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <div class="position-fixed" style="bottom: 20px; right: 20px;" data-bs-toggle="tooltip" data-bs-placement="left" title="Registrar nova tarefa">
+        <button class="position-relative btn btn__floating border__primary rounded rounded-3 hover" data-bs-toggle="modal" data-bs-target="#modal_create_todo">
+            <span class="material-icons">
+                add
+            </span>
+        </button>
     </div>
 {% endblock %}
 
 {% block script %}
     <script>
         $(document).ready(function(){
-            let data = "{{ todos | escapejs  }}";
+            $("[data-bs-toggle='tooltip']").tooltip();
             
-            get_all_todos("GET", data, "id_todos");
+            let data = "{{ tasks | escapejs  }}";
+            
+            get_all_todos("GET", data, "id_tasks");
         });
 
         $('#id_form').validate({
@@ -57,12 +76,12 @@
             submitHandler: function( form ){
                 $.ajax({
                     type: "POST",
-                    url: "{% url 'create_todo' %}",
+                    url: "{% url 'create_task' %}",
                     data: $( form ).serialize(),
                     success: function( response ){
                         if( response.status === 200 ) {
                             $("#id_form").trigger('reset');
-                            get_all_todos("POST", response, "id_todos");
+                            get_all_todos("POST", response, "id_tasks");
                         } else {
                             generate_toast("error", "Falha na autenticação!", response["error"]);
                         }

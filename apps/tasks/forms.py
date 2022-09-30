@@ -1,9 +1,9 @@
 from django.forms import ModelForm
-from .models import Todo
+from .models import Task
 
-class TodoForm(ModelForm):
+class TaskForm(ModelForm):
     class Meta:
-        model = Todo
+        model = Task
         fields = ("title", "description")
 
         # error_messages = {

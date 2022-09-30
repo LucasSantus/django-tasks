@@ -1,4 +1,105 @@
+:root{
+    --primary-color: #1B253B;
+    --secondary-color: #232D45;
+    --third-color: #28334E;
+}
 
+/* BACKGROUNDS */
+.bg__primary{
+    background-color: var(--primary-color) !important;
+}
+.bg__secondary{
+    background-color: var(--secondary-color) !important;
+}
+.bg__third{
+    background-color: var(--third-color) !important;
+}
+
+/* COLOR TEXTS */
+.text__primary{
+    color: var(--primary-color) !important;
+}
+.text__secondary{
+    color: var(--secondary-color) !important;
+}
+.text__third{
+    color: var(--third-color) !important;
+}
+
+/* BUTTONS */
+.btn{
+    color: white !important;
+}
+
+.btn__floating{
+    height: 40px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background-color: var(--primary-color) !important;
+}
+.btn__primary{
+    background-color: var(--primary-color) !important;
+}
+.btn__secondary{
+    background-color: var(--secondary-color) !important;
+}
+.btn__third{
+    background-color: var(--third-color) !important;
+}
+
+/* BORDERS */
+.border__primary{
+    border: 1px solid var(--primary-color) !important;
+}
+.border__secondary{
+    border: 1px solid var(--secondary-color) !important;
+}
+.border__third{
+    border: 1px solid var(--third-color) !important;
+}
+
+/* BORDER RADIUS */
+
+.rounded__custom{
+    border-radius: 11px;
+}
+
+.rounded__custom_2{
+    border-radius: 16px;
+}
+
+.rounded__custom_3{
+    border-radius: 36px;
+}
+
+/* OPACITY */
+.hover:hover{
+    opacity: .7;
+}
+
+/* OTHERS */
 .is-invalid{
-    color: red !important
+    color: red !important;
+    font-weight: 200 !important;
+}
+
+.form-control{
+    background-color: var(--primary-color) !important;
+    border: none !important;
+    border: 1px solid var(--third-color) !important;
+    color: white !important;
+}
+
+.form-control:focus{
+    box-shadow:0 0 0 .15rem var(--third-color) !important;
+}
+
+.form-label{
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+.selector-for-some-widget {
+    box-sizing: content-box;
 }

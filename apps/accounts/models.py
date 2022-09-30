@@ -49,7 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
         verbose_name = "Usuário"
         verbose_name_plural = "Usuários"
         db_table = "users"
-        app_label = "users"
+        app_label = "accounts"
 
     def get_short_name(self):
         # split_full_name = self.full_name.split()

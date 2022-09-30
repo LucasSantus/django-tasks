@@ -1,5 +1,5 @@
 from django import forms
-from users.models import User
+from accounts.models import User
 
 class SignupForm(forms.ModelForm):
     confirm_password = forms.CharField(

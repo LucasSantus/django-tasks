@@ -1,4 +1,4 @@
-from users.models import User
+from accounts.models import User
 from django.http import JsonResponse
 
 # Validar se o usuário está cadastrado.

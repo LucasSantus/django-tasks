@@ -40,8 +40,8 @@ INSTALLED_APPS += [
 # Intern Apps
 INSTALLED_APPS += [
     'core',
-    'users',
-    'todo'
+    'accounts',
+    'tasks',
 ]
 
 
@@ -140,7 +140,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "accounts.User"
 
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = '/'
@@ -153,7 +153,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = str(os.environ.get('EMAIL_HOST_USER', ""))
 EMAIL_HOST_PASSWORD = str(os.environ.get('EMAIL_HOST_PASSWORD', ""))
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Spending'
+DEFAULT_FROM_EMAIL = 'Tasks'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
