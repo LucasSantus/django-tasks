@@ -1,8 +1,10 @@
 <h1 align="center">Tasks</h1>
 
+<!--
 <h6 align="center"> 
 	Se você quiser visualizar o sistema, clique <a href="">aqui</a>.
 </h6>
+-->
 
 <h3 id="sobre">:information_source: Sobre</h3>
 
@@ -177,5 +179,5 @@ Obrigado por visitar e boa codificação!<br />
 
 <h3 id="license">:memo: License</h3>
 
-Este projeto está licenciado sob a Licença MIT License - veja o [LICENSE.md](https://github.com/LucasSantus/django-deezer/blob/master/LICENSE) para melhores detalhes.
+Este projeto está licenciado sob a Licença GNU Affero General Public License v3.0 - veja o [LICENSE.md](https://github.com/LucasSantus/django-tasks/blob/master/LICENSE) para melhores detalhes.
 
