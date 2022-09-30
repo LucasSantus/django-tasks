@@ -1,7 +1,7 @@
 :root{
-    --primary-color: #232a3b;
-    --secondary-color: #293145;
-    --third-color: yellow;
+    --primary-color: #1B253B;
+    --secondary-color: #232D45;
+    --third-color: #28334E;
 }
 
 /* BACKGROUNDS */
@@ -15,10 +15,22 @@
     background-color: var(--third-color) !important;
 }
 
+/* COLOR TEXTS */
+.text__primary{
+    color: var(--primary-color) !important;
+}
+.text__secondary{
+    color: var(--secondary-color) !important;
+}
+.text__third{
+    color: var(--third-color) !important;
+}
+
 /* BUTTONS */
 .btn{
     color: white !important;
 }
+
 .btn__floating{
     height: 40px;
     display: flex !important;
@@ -68,7 +80,24 @@
 
 /* OTHERS */
 .is-invalid{
-    color: red !important
+    color: red !important;
+    font-weight: 200 !important;
+}
+
+.form-control{
+    background-color: var(--primary-color) !important;
+    border: none !important;
+    border: 1px solid var(--third-color) !important;
+    color: white !important;
+}
+
+.form-control:focus{
+    box-shadow:0 0 0 .15rem var(--third-color) !important;
+}
+
+.form-label{
+    color: white !important;
+    font-weight: 600 !important;
 }
 
 .selector-for-some-widget {
