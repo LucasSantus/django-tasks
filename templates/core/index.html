@@ -24,11 +24,11 @@
                         {% bootstrap_form form %}
 
                         <div class="d-flex justify-content-end gap-2">
-                            <button id="btn-submit" class="btn btn-outline-secondary hover rounded-3 ft-bold" type="submit">
+                            <a id="btn-submit" class="btn btn-outline-secondary hover rounded-3 ft-bold" data-bs-dismiss="modal">
                                 <span class="px-3">
                                     Cancelar
                                 </span>
-                            </button>
+                            </a>
                             <button id="btn-submit" class="btn btn-primary hover rounded-3 ft-bold" type="submit">
                                 <span class="px-3">
                                     Registrar
@@ -91,4 +91,3 @@
         });
     </script>
 {% endblock %}
-
