@@ -97,7 +97,7 @@ python -m pip install --upgrade pip
 
 pip install -r requirements.txt
 
-python manage.py makemigrations home
+python manage.py makemigrations core
 
 python manage.py makemigrations accounts
 
@@ -127,7 +127,7 @@ python -m pip install --upgrade pip
 
 pip install -r requirements.txt
 
-python manage.py makemigrations home
+python manage.py makemigrations core
 
 python manage.py makemigrations accounts
 
