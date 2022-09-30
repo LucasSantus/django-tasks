@@ -40,6 +40,8 @@ INSTALLED_APPS += [
 # Intern Apps
 INSTALLED_APPS += [
     'core',
+    'accounts',
+    'tasks',
     'users',
     'todo'
 ]
