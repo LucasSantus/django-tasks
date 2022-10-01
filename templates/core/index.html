@@ -56,9 +56,9 @@
     <script>
         $(document).ready(function(){
             $("[data-bs-toggle='tooltip']").tooltip();
-            
+
             let data = "{{ tasks | escapejs  }}";
-            
+
             get_all_todos("GET", data, "id_tasks");
         });
 
