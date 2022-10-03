@@ -1,8 +1,7 @@
-from django.shortcuts import render
 from .forms import TaskForm
-from accounts.models import User
 from django.http import JsonResponse
 from tasks.forms import TaskForm
+from tasks.models import Task
 from django.core import serializers
 from django.shortcuts import get_object_or_404
 
@@ -28,7 +27,7 @@ def create_task(request):
 
     return JsonResponse(context)
 
-def delete_task(request, id):
+def remove_task(request, id):
     task = get_object_or_404(Task, id = id)
     task.delete()
 
