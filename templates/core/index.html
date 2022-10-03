@@ -59,7 +59,7 @@
 
             let data = "{{ tasks | escapejs  }}";
 
-            get_all_todos("GET", data, "id_tasks");
+            build_tasks("GET", data, "id_tasks");
         });
 
         $('#id_form').validate({
@@ -81,7 +81,7 @@
                     success: function( response ){
                         if( response.status === 200 ) {
                             $("#id_form").trigger('reset');
-                            get_all_todos("POST", response, "id_tasks");
+                            build_tasks("POST", response, "id_tasks");
                         } else {
                             generate_toast("error", "Falha na autenticação!", response["error"]);
                         }
