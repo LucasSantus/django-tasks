@@ -1,14 +1,13 @@
-from django.shortcuts import render
 from .forms import TaskForm
-from accounts.models import User
 from django.http import JsonResponse
 from tasks.forms import TaskForm
+from tasks.models import Task
 from django.core import serializers
+from django.shortcuts import get_object_or_404
 
 # CATEGORY
 def create_task(request):
-    context = { "error": None, "status": 400 }
-    print("ASDASDA")
+    context = { "error": False, "status": 400 }
     if request.is_ajax and request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():
@@ -25,5 +24,13 @@ def create_task(request):
             
             context = { "error": form.errors, "status": 400 }
             # return JsonResponse({ "error": form.errors }, status = 400)
+
+    return JsonResponse(context)
+
+def remove_task(request, id):
+    task = get_object_or_404(Task, id = id)
+    task.delete()
+
+    context = { "is_delete": True, "status": 400 }
 
     return JsonResponse(context)
