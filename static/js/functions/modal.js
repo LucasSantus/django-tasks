@@ -12,3 +12,4 @@ const modal_alert = ( id ) => `
         </div>
     </div>
 `
+
