@@ -1,6 +1,6 @@
 const build_button = ( url, color, icon, id ) => `
-    <a href="${ url }" data-bs-toggle="modal" data-bs-target="#modal-delete-${id}" class="d-flex align-items-center text-decoration-none bg-${ color } border border-${ color } rounded-3 hover">
-        <span class="material-icons text-white fs-5 p-1">${ icon }</span>
+    <a href="${ url }" data-bs-toggle="modal" data-bs-target="#modal-${id}" class="d-flex align-items-center text-decoration-none border border-${ color } rounded-3 hover">
+        <span class="material-icons text-${ color   } fs-5 p-1">${ icon }</span>
     </a>
 `;
 
@@ -27,19 +27,17 @@ const build_html = ( item ) => {
                 </div>
             </div>
             
-            <div class="modal fade" id="modal-delete-${ item.id }" tabindex="-1" aria-labelledby="modal-delete-${ item.id }-label" aria-hidden="true">
-                <div class="modal-dialog">
+            <div class="modal fade" id="modal-${ item.id }" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modal-delete-${ item.id }-label">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
                         <div class="modal-body">
-                            Deseja realmente deletar?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <div class="d-flex flex-column justify-content-center text-center gap-4">
+                                <section>
+                                    <span class="material-icons text-info border-info rounded-pill p-3" style="font-size: 80px; border-width: 10px; border-style: solid">edit</span>
+                                </section>                                
+                                <span>Deseja realmente deletar?</span>
+                                <button type="button" class="btn btn__primary hover">Confirmar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
