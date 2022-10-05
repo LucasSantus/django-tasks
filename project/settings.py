@@ -13,7 +13,10 @@ sys.path.append(
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-SECRET_KEY = os.environ.get('SECRET_KEY', get_random_secret_key())
+# SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-xetlkurkpaqsloru-ss-h$w&-%r#)2&heo=fob56^9bvm%xp#q)
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-xetlkurkpaqsloru-ss-h$w&-%r#)2&heo=fob56^9bvm%xp#q'
 
 DEBUG = int(os.environ.get('DEBUG', 1))
 
@@ -31,12 +34,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-# Extern Apps
-INSTALLED_APPS += [
-    'bootstrap5',
-    'compressor'
-]
-
 # Intern Apps
 INSTALLED_APPS += [
     'core',
@@ -44,6 +41,11 @@ INSTALLED_APPS += [
     'tasks',
 ]
 
+# Extern Apps
+INSTALLED_APPS += [
+    'bootstrap5',
+    'compressor'
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,11 +89,17 @@ DATABASES = {
 }
 
 if DEBUG:
+    # COMPRESSOR CONFIG
+    COMPRESS_DEBUG_TOGGLE = 'whatever'
+
+    # DEBUG CONFIG
     INSTALLED_APPS += ['debug_toolbar']
     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
     DEBUG_TOOLBAR_CONFIG = {
         'SHOW_TOOLBAR_CALLBACK': lambda request: False if request.is_ajax() else True,
     }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -162,3 +170,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+COMPRESS_URL = STATIC_URL
+COMPRESS_ROOT = STATIC_ROOT
+COMPRESS_OFFLINE = False
+COMPRESS_OFFLINE_MANIFEST = "manifest.json"
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter','compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_YUI_BINARY = os.path.join(BASE_DIR, 'bin/yui.sh')
+COMPRESS_JS_FILTERS = ['compressor.filters.closure.ClosureCompilerFilter']
+COMPRESS_CLOSURE_COMPILER_BINARY = os.path.join(BASE_DIR, 'bin/closure.sh')
+COMPRESS_CLOSURE_COMPILER_ARGUMENTS = "--language_in=ECMASCRIPT5"
