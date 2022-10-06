@@ -27,6 +27,17 @@ def create_task(request):
 
     return JsonResponse(context)
 
+def disable_task(request, slug_task):
+    task = get_object_or_404(Task, slug = slug_task)
+    task.is_active = False
+    task.save()
+
+    context = { 
+        "status": 200
+    }
+
+    return JsonResponse(context)
+
 def remove_task(request, id):
     task = get_object_or_404(Task, id = id)
     task.delete()
