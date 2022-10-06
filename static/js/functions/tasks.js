@@ -5,8 +5,6 @@ const build_button = ( url, color, icon, id ) => `
 `;
 
 const build_html = ( item ) => {
-    console.log(item)
-
     const buttons = [
         { id: `change-${item.id}`, url: "#", color: "info", icon: "edit" },
         { id: `delete-${item.id}`, url: "#", color: "danger", icon: "delete" }
@@ -20,7 +18,7 @@ const build_html = ( item ) => {
             </div>
             <div class="ps-3 w-100 d-flex justify-content-between">
                 <div>
-                    <a id="title_${item.id}" href="${item.redirect}" class="text-decoration-none text-white"> fdsfsdfsd ${ item.title } </a>
+                    <a id="title_${item.id}" href="${item.redirect}" class="text-decoration-none text-white"> ${ item.title } </a>
                 </div>
                 <div class="d-flex gap-2">
                     ${buttons.map((option) => build_button(option.url, option.color, option.icon, item.id))}
@@ -55,18 +53,23 @@ const check_item = ( item ) => {
         if($(this).is(':checked')){
             $.ajax({
                 type: "POST",
-                url: "{% url 'desactivate_task' %}",
+                url: item.disable,
                 data: item,
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken")
+                },
+                beforeSend: (  ) => {
+                    hold_start("Aguarde um momento, estamos finalizando sua task");
+                },
                 success: function( response ){
-                    if( response.status === 200 ) {
-                        $("#id_form").trigger('reset');
-                        build_tasks("POST", response, "id_tasks");
-                    } else {
-                        generate_toast("error", "Falha na autenticação!", response["error"]);
-                    }
+                    hold_close();
+
+                    $(`#id_task_${item.id}`).remove();
+                },
+                error: (  ) => {
+                    hold_close();
                 }
             });
-            $(`#title_${item.id}`).addClass("text-decoration-line-through");
         } 
         else {
             $(`#title_${item.id}`).removeClass("text-decoration-line-through");
@@ -74,14 +77,20 @@ const check_item = ( item ) => {
     })
 }
 
+
 const build_tasks = ( method, response, id ) => {
-    let values = method === "GET" ? 
+    let items = method === "GET" ? 
         JSON.parse(response) : JSON.parse(response["data"])[0]["fields"];
 
-    values.map((item) => {
-        $( build_html(item) ).appendTo("#" + id);
-        check_item( item );
-    });
+    if( items.length > 0 ) {
+        items.forEach((item) => {
+            $( build_html(item) ).appendTo("#" + id);
+            check_item( item );
+        });
+    } else {
+        $( build_html(items) ).appendTo("#" + id);
+        check_item(items);
+    }
 
     $('.modal').modal('hide');
 
