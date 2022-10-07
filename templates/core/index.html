@@ -78,6 +78,9 @@
                     type: "POST",
                     url: "{% url 'create_task' %}",
                     data: $( form ).serialize(),
+                    beforeSend: (  ) => {
+                        hold_start("Aguarde um momento, estamos registrando sua nova task");
+                    },
                     success: function( response ){
                         if( response.status === 200 ) {
                             $("#id_form").trigger('reset');
@@ -85,6 +88,10 @@
                         } else {
                             generate_toast("error", "Falha na autenticação!", response["error"]);
                         }
+                        hold_close();
+                    },
+                    error: (  ) => {
+                        hold_close();
                     }
                 });
                 return false;
