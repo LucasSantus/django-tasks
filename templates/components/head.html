@@ -2,7 +2,6 @@
 
 {% load compress %}
 
-
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,25 +55,45 @@
     <!-- Import JQuery JS -->
     <script type="text/javascript" src="{% static 'js/jquery/jquery.min.js' %}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <!-- Import Validate JQuery -->
+    <script type="text/javascript" src="{% static 'js/jquery/validate.min.js' %}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js" defer></script>
+    <!-- Import Methods Additionals -->
+    <script type="text/javascript" src="{% static 'js/jquery/additional-methods.min.js' %}" defer></script>
 
     <!-- Import Bootstrap Bundle JS -->
     <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}" defer></script>
 
-    <!-- Import Function Toasts JS -->
-    <script type="text/javascript" src="{% static 'js/functions/toasts.js' %}" defer></script>
-
-    <!-- Import Function Todos JS -->
-    <script type="text/javascript" src="{% static 'js/functions/tasks.js' %}"></script>
-
     <!-- Import HoldOn JS -->
     <script type="text/javascript" src="{% static 'js/holdon/holdon.min.js' %}" defer></script>
 
+    <!-- Import Global Functions JS -->
+    <script type="text/javascript" src="{% static 'js/functions/globals.js' %}" defer></script>
+
+    <!-- Import Toast Functions  JS -->
+    <script type="text/javascript" src="{% static 'js/functions/toasts.js' %}" defer></script>
+
+    <!-- Import Task Function JS -->
+    <script type="text/javascript" src="{% static 'js/functions/tasks.js' %}" defer></script>
+
+    <!-- Import HoldON Function JS -->
+    <script type="text/javascript" src="{% static 'js/functions/hold-on.js' %}" defer></script>
+
+    <!-- Disabled Context Menu on pages -->
     <script type="text/javascript" defer>
-        /* disabled Context Menu on pages */
         //document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $(window).bind('beforeunload', function() {
+                hold_start();
+            });
+
+            $(window).on('load', function() {
+                hold_close();
+            })
+        });
     </script>
 
 {% endcompress %}
