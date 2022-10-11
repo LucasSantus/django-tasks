@@ -1,9 +1,22 @@
+/**
+ * function constructor button elements.
+ * @param string url 
+ * @param string color 
+ * @param string icon 
+ * @param string id 
+ * @returns string
+ */
 const build_button = ( url, color, icon, id ) => `
     <a href="${ url }" data-bs-toggle="modal" data-bs-target="#modal-${id}" class="d-flex align-items-center text-decoration-none border border-${ color } rounded-3 hover">
         <span class="material-icons text-${ color } fs-5 p-1">${ icon }</span>
     </a>
 `;
 
+/**
+ * function constructor html elements.
+ * @param {*} item 
+ * @returns 
+ */
 const build_html = ( item ) => {
     const buttons = [
         { id: `change-${item.id}`, url: "#", color: "info", icon: "edit" },
@@ -44,6 +57,11 @@ const build_html = ( item ) => {
     `
 };
 
+/**
+ *  function prepare validation 
+ * @param string element 
+ * @param string[] items 
+ */
 const prepare_validation = ( element, items ) => {
     for( let item of items ) $(element).removeClass(item);
 }
@@ -53,20 +71,20 @@ const check_item = ( item ) => {
         if($(this).is(':checked')){
             $.ajax({
                 type: "POST",
-                url: item.disable,
+                url: item.get_url_change_status,
                 data: item,
                 headers: {
                     "X-CSRFToken": getCookie("csrftoken")
                 },
-                beforeSend: (  ) => {
+                beforeSend: ( ) => {
                     hold_start("Aguarde um momento, estamos finalizando sua task");
                 },
                 success: function( response ){
                     hold_close();
 
-                    $(`#id_task_${item.id}`).remove();
+                    // $(`#id_task_${item.id}`).remove();
                 },
-                error: (  ) => {
+                error: ( ) => {
                     hold_close();
                 }
             });
@@ -76,7 +94,6 @@ const check_item = ( item ) => {
         }
     })
 }
-
 
 const build_tasks = ( method, response, id ) => {
     let items = method === "GET" ? 
