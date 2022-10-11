@@ -3,6 +3,7 @@ from core.models import BaseModel
 from autoslug import AutoSlugField
 import random
 from django.http import JsonResponse
+from django.urls import reverse
 
 # Create your models here.
 class Task(BaseModel):
@@ -14,8 +15,11 @@ class Task(BaseModel):
     def generated_slug_title(self):
         return f"{self.title}-{random.randint(1, 9999)}"
 
-    def deactivate_task(self):
-        return reverse('task:deactivate', args=[str(self.slug)])
+    def get_url_change_status(self):
+        if self.is_active:
+            return reverse('activate', args=[str(self.slug)])
+        else: 
+            return reverse('deactivate', args=[str(self.slug)])
 
     class Meta:
         verbose_name = "Tarefas"
