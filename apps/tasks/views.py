@@ -4,9 +4,10 @@ from tasks.forms import TaskForm
 from tasks.models import Task
 from django.core import serializers
 from django.shortcuts import get_object_or_404
+import datetime
 
 # CATEGORY
-def create_task(request):
+def create(request):
     context = { "error": False, "status": 400 }
     if request.is_ajax and request.method == "POST":
         form = TaskForm(request.POST)
@@ -27,9 +28,14 @@ def create_task(request):
 
     return JsonResponse(context)
 
-def disable_task(request, slug_task):
+def change_status(request, slug_task):
     task = get_object_or_404(Task, slug = slug_task)
-    task.is_active = False
+    if task.is_active: 
+        task.is_active = False
+        task.deactivate_at = datetime.datetime.now()
+    else: 
+        task.is_active = True
+
     task.save()
 
     context = { 
