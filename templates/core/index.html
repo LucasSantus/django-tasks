@@ -76,7 +76,7 @@
             submitHandler: function( form ){
                 $.ajax({
                     type: "POST",
-                    url: "{% url 'create_task' %}",
+                    url: "{% url 'create' %}",
                     data: $( form ).serialize(),
                     beforeSend: (  ) => {
                         hold_start("Aguarde um momento, estamos registrando sua nova task");
@@ -90,7 +90,7 @@
                         }
                         hold_close();
                     },
-                    error: (  ) => {
+                    error: ( ) => {
                         hold_close();
                     }
                 });
