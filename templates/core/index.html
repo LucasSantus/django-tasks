@@ -6,12 +6,29 @@
     <div class="vw-100 vh-100 bg__secondary">
         <div class="container">
             <form>
-                <input type="text" class="form-control" id="search-todo" placeholder="Pesquisar...">
+                <input type="text" class="form-control m-0" id="search-todo" placeholder="Pesquisar...">
             </form>
         </div>
-        
-        <div class="mt-4">
-            <div id="id_tasks" class="vw-100 h-100 bg__secondary"></div>
+
+        <ul class="nav d-flex justify-content-between container w-100 mt-3" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" role="tab" aria-controls="home" aria-selected="true">
+                    <span class="cursor-pointer">Tarefas criadas</span> <span id="total_length" class="badge bg-secondary">4</span>
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                    <span class="cursor-pointer">Tarefas concluídas</span> <span id="disabled_total_length" class="badge bg-secondary">1 de 4</span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane text-white fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div id="id_task_enabled" class="vw-100 h-100 bg__secondary"></div>
+            </div>
+            <div class="tab-pane text-white fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div id="id_task_desabled" class="vw-100 h-100 bg__secondary"></div>
+            </div>
         </div>
     </div>
 
@@ -56,10 +73,11 @@
     <script>
         $(document).ready(function(){
             $("[data-bs-toggle='tooltip']").tooltip();
+            $(".tab").tab();
 
             let data = "{{ tasks | escapejs  }}";
 
-            build_tasks("GET", data, "id_tasks");
+            build_tasks("GET", data, "id_task_enabled");
         });
 
         $('#id_form').validate({
@@ -84,7 +102,7 @@
                     success: function( response ){
                         if( response.status === 200 ) {
                             $("#id_form").trigger('reset');
-                            build_tasks("POST", response, "id_tasks");
+                            build_tasks("POST", response, "id_task_enabled");
                         } else {
                             generate_toast("error", "Falha na autenticação!", response["error"]);
                         }
