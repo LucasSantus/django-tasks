@@ -1,40 +1,52 @@
-// Função para criar toast's
-function generate_toast(type, title, message){
-    let type_message = type
-    if(type == 'error'){
-        type_message = "danger"
-    }
-
-    $('#assembly').empty();
-    
+/**
+ * function for building the list of container for toasts.
+ */
+const build_toast_container = () => {
     $(`
-        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <img src="..." class="rounded me-2" alt="...">
-            <strong class="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        <div id='assembly'>
+            <div id='toast_container' class='toast-container position-fixed' style='top: 20px; right: 40px'></div>
         </div>
-        <div class="toast-body">
-            Hello, world! This is a toast message.
-        </div>
-        </div>
-    </div>
-        <div class="toast fade show">
-            <div role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header text-${type_message}">
-                    <strong class="me-auto">
-                        ${title}
-                    </strong>
-                    <small class="text-muted">Agora</small>
-                </div>
-                <div class="toast-body text-${type_message}">
-                    ${message}
-                </div>
+    `).appendTo('body')
+}
+
+/**
+ *  function for delete toast with time to 10 seconds after the building toast.
+ * @param { string } id 
+ */
+const delete_toast = ( id ) => { 
+    setTimeout( function(){
+        $('#' + id).remove()
+    }, 10000);
+}
+
+/**
+ *  function for building the assembly message toast with user.
+ * @param { string } type
+ * @param { string } title
+ * @param { string } message
+ */
+const toast = ( type = 'dark', title, message ) => {
+    const is_valid_type = [ 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', ]
+
+    if( !is_valid_type.includes(type) ) throw new Error('type not found!')
+
+    const id = 'toast-' + Math.floor(Math.random() * 100)
+
+    delete_toast( id )
+
+    $(`
+        <div id=${ id } class='toast' role='alert' aria-live='assertive' aria-atomic='true'>
+            <div class='toast-header text-${ type }'>
+                <strong class='me-auto'>
+                    ${ title }
+                </strong>
+                <small class='text-muted'>Agora</small>
+            </div>
+            <div class='toast-body text-${ type }'>
+                ${ message }
             </div>
         </div>
-    `).appendTo("#assembly");
+    `).appendTo('#toast_container');
 
-    $(".toast").toast("show")
+    $('.toast').toast('show')
 }
