@@ -12,7 +12,6 @@ def error_404(request, exception):
 
 @login_required
 def index(request):
-    # tasks = Task.objects.prefetch_related("user").filter( user = request.user, is_active = True ).values()
     tasks = Task.objects.prefetch_related("user").filter( user = request.user ).values()
 
     form = TaskForm()
