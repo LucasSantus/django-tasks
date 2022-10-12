@@ -31,7 +31,7 @@ const build_html = ( item ) => {
             </div>
             <div class="ps-3 w-100 d-flex justify-content-between">
                 <div>
-                    <a id="title_${item.id}" href="${item.redirect}" class="text-decoration-none text-white"> ${ item.title } </a>
+                    <a id="title_${item.id}" class="text-decoration-none text-white"> ${ item.title } </a>
                 </div>
                 <div class="d-flex gap-2">
                     ${buttons.map((option) => build_button(option.url, option.color, option.icon, item.id))}
