@@ -3,7 +3,7 @@
 {% load bootstrap5 %}
 
 {% block content %}
-    <div class="vw-100 vh-100 bg__secondary">
+    <div class="vh-100 bg__secondary">
         <div class="container">
             <form>
                 <input type="text" class="form-control m-0" id="search-todo" placeholder="Pesquisar...">
@@ -24,10 +24,10 @@
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane text-white fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div id="id_task_enabled" class="vw-100 h-100 bg__secondary"></div>
+                <div id="id_task_enabled" class="w-100 h-100 bg__secondary px-3 pb-3"></div>
             </div>
             <div class="tab-pane text-white fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <div id="id_task_desabled" class="vw-100 h-100 bg__secondary"></div>
+                <div id="id_task_desabled" class="vw-100 h-100 bg__secondary px-3 pb-3"></div>
             </div>
         </div>
     </div>
@@ -100,16 +100,15 @@
                         hold_start("Aguarde um momento, estamos registrando sua nova task");
                     },
                     success: function( response ){
-                        if( response.status === 200 ) {
-                            $("#id_form").trigger('reset');
-                            build_tasks("POST", response, "id_task_enabled");
-                        } else {
-                            generate_toast("error", "Falha na autenticação!", response["error"]);
-                        }
                         hold_close();
+
+                        toast( "success", "Sucesso!", "Tarefa registrada com sucesso!" )
+                        $("#id_form").trigger('reset');
+                        build_tasks("POST", response, "id_task_enabled");
                     },
-                    error: ( ) => {
+                    error: (  ) => {
                         hold_close();
+                        toast( "danger", "Falha na autenticação!", "Não foi possível realizar o registro" );
                     }
                 });
                 return false;
