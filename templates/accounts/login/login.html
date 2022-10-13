@@ -64,7 +64,7 @@
                     data: form.serialize(),
                     dataType: 'json',
                     success: function (data) {
-                        if(!data.is_user) generate_toast("error", "Falha na autenticação!", "O e-mail inserido não está registrado no sistema!");
+                        if(!data.is_user) toast("error", "Falha na autenticação!", "O e-mail inserido não está registrado no sistema!");
                     }
                 });
             });

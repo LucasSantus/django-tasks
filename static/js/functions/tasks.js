@@ -1,9 +1,9 @@
 /**
  * function constructor button elements.
- * @param string url 
- * @param string color 
- * @param string icon 
- * @param string id 
+ * @param { string } url 
+ * @param { string } color 
+ * @param { string } icon 
+ * @param { string } id 
  * @returns string
  */
 const build_button = ( url, color, icon, id ) => `
@@ -14,8 +14,8 @@ const build_button = ( url, color, icon, id ) => `
 
 /**
  * function constructor html elements.
- * @param {*} item 
- * @returns 
+ * @param { object } item 
+ * @returns string
  */
 const build_html = ( item ) => {
     const buttons = [
@@ -31,7 +31,7 @@ const build_html = ( item ) => {
             </div>
             <div class="ps-3 w-100 d-flex justify-content-between">
                 <div>
-                    <a id="title_${item.id}" href="${item.redirect}" class="text-decoration-none text-white"> ${ item.title } </a>
+                    <a id="title_${item.id}" class="text-decoration-none text-white"> ${ item.title } </a>
                 </div>
                 <div class="d-flex gap-2">
                     ${buttons.map((option) => build_button(option.url, option.color, option.icon, item.id))}
@@ -59,8 +59,8 @@ const build_html = ( item ) => {
 
 /**
  *  function prepare validation 
- * @param string element 
- * @param string[] items 
+ * @param { string } element 
+ * @param { string[] } items 
  */
 const prepare_validation = ( element, items ) => {
     for( let item of items ) $(element).removeClass(item);
