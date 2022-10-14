@@ -10,18 +10,25 @@
             </form>
         </div>
 
-        <ul class="nav d-flex justify-content-between container w-100 mt-3" id="myTab" role="tablist">
+        <ul class="nav container d-flex justify-content-between w-100 mt-2" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" role="tab" aria-controls="home" aria-selected="true">
-                    <span class="cursor-pointer">Tarefas criadas</span> <span id="total_length" class="badge bg-secondary">4</span>
+                <a class="nav-link p-0" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" role="tab" aria-controls="home" aria-selected="true">
+                    <span class="cursor-pointer">
+                        Tarefas criadas 
+                        <span id="total_length" class="badge bg-secondary">4</span>
+                    </span> 
                 </a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                    <span class="cursor-pointer">Tarefas concluídas</span> <span id="disabled_total_length" class="badge bg-secondary">1 de 4</span>
+                <a class="nav-link p-0" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                    <span class="cursor-pointer">
+                        Tarefas concluídas 
+                        <span id="disabled_total_length" class="badge bg-secondary">1 de 4</span>
+                    </span>
                 </a>
             </li>
         </ul>
+
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane text-white fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div id="id_task_enabled" class="w-100 h-100 bg__secondary px-3 pb-3"></div>

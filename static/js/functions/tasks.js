@@ -29,7 +29,7 @@ const build_html = ( item ) => {
                 <input class="form-check-input" type="checkbox" id="checkbox_task_${ item.id }">
                 <label class="form-check-label" for="checkbox_task_${ item.id }"></label>
             </div>
-            <div class="ps-3 w-100 d-flex justify-content-between">
+            <div class="w-100 d-flex justify-content-between">
                 <div>
                     <a id="title_${item.id}" class="text-decoration-none text-white"> ${ item.title } </a>
                 </div>
